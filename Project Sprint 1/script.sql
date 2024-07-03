@@ -1,3 +1,4 @@
+-- Adding indexes and improving schema
 CREATE TABLE Consoles
 (
     console_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -5,7 +6,8 @@ CREATE TABLE Consoles
     type             VARCHAR(50)    NULL,
     storage_capacity VARCHAR(20)    NULL,
     purchase_date    DATE           NULL,
-    cost             DECIMAL(10, 2) NULL
+    cost             DECIMAL(10, 2) NULL,
+    INDEX (type)
 );
 
 CREATE TABLE Customers
@@ -16,7 +18,8 @@ CREATE TABLE Customers
     email        VARCHAR(100) NOT NULL UNIQUE,
     phone_number VARCHAR(15)  NULL,
     address      TEXT         NULL,
-    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX (email)
 );
 
 CREATE TABLE Inventory
@@ -26,7 +29,8 @@ CREATE TABLE Inventory
     serial_number VARCHAR(100) UNIQUE NOT NULL,
     status        ENUM ('Available', 'Rented', 'Maintenance') DEFAULT 'Available',
     FOREIGN KEY (console_id) REFERENCES Consoles (console_id)
-        ON DELETE CASCADE ON UPDATE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX (console_id)
 );
 
 CREATE TABLE Rentals
@@ -42,7 +46,9 @@ CREATE TABLE Rentals
     FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (inventory_id) REFERENCES Inventory (inventory_id)
-        ON DELETE CASCADE ON UPDATE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX (customer_id),
+    INDEX (inventory_id)
 );
 
 CREATE TABLE Transactions
