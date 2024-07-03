@@ -4,10 +4,10 @@ CREATE ROLE Boss_role;
 CREATE ROLE Employee_role;  
 
 -- Create Boss User
-CREATE USER 'boss'@'localhost' IDENTIFIED BY 'boss_password';
+CREATE USER 'boss'@'localhost' IDENTIFIED BY 'boss_password_Str0ng!';
 
 -- Create Employee User
-CREATE USER 'employee'@'localhost' IDENTIFIED BY 'employee_password';
+CREATE USER 'employee'@'localhost' IDENTIFIED BY 'employee_password_Str0ng!';
 
 -- Boss has all privileges - Grant By Root
 GRANT ALL PRIVILEGES ON customers.* TO Boss_role WITH GRANT OPTION;
