@@ -100,9 +100,3 @@ DELIMITER ;
 -- Insert example with data integrity check
 INSERT INTO Rentals (customer_id, inventory_id, rental_start_date, rental_end_date, total_cost)
 VALUES (10000, 100000, '2023-05-01', '2023-04-30', 50.00); -- !!!!! This should fail due to the trigger
-
--- Revoking unnecessary privileges from a role
-REVOKE INSERT, UPDATE ON customers FROM some_role;
-
--- Granting necessary privileges to a role
-GRANT SELECT ON view_customers_safe TO some_role;
