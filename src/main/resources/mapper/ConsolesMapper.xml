@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uvic.mapper.ConsolesMapper">
+
+    <resultMap id="BaseResultMap" type="com.uvic.entity.Consoles">
+            <id property="consoleId" column="console_id" jdbcType="INTEGER"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="storageCapacity" column="storage_capacity" jdbcType="VARCHAR"/>
+            <result property="purchaseDate" column="purchase_date" jdbcType="DATE"/>
+            <result property="cost" column="cost" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        console_id,model,type,
+        storage_capacity,purchase_date,cost
+    </sql>
+</mapper>

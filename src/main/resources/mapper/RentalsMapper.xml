@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uvic.mapper.RentalsMapper">
+
+    <resultMap id="BaseResultMap" type="com.uvic.entity.Rentals">
+            <id property="rentalId" column="rental_id" jdbcType="INTEGER"/>
+            <result property="customerId" column="customer_id" jdbcType="INTEGER"/>
+            <result property="inventoryId" column="inventory_id" jdbcType="INTEGER"/>
+            <result property="rentalStartDate" column="rental_start_date" jdbcType="TIMESTAMP"/>
+            <result property="rentalEndDate" column="rental_end_date" jdbcType="TIMESTAMP"/>
+            <result property="rentalStatus" column="rental_status" jdbcType="OTHER"/>
+            <result property="totalCost" column="total_cost" jdbcType="DECIMAL"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rental_id,customer_id,inventory_id,
+        rental_start_date,rental_end_date,rental_status,
+        total_cost,created_at
+    </sql>
+</mapper>

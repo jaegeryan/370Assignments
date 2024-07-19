@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uvic.mapper.TransactionsMapper">
+
+    <resultMap id="BaseResultMap" type="com.uvic.entity.Transactions">
+            <id property="transactionId" column="transaction_id" jdbcType="INTEGER"/>
+            <result property="rentalId" column="rental_id" jdbcType="INTEGER"/>
+            <result property="amount" column="amount" jdbcType="DECIMAL"/>
+            <result property="transactionDate" column="transaction_date" jdbcType="TIMESTAMP"/>
+            <result property="paymentMethod" column="payment_method" jdbcType="OTHER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        transaction_id,rental_id,amount,
+        transaction_date,payment_method
+    </sql>
+</mapper>
