@@ -4,6 +4,7 @@ import com.uvic.entity.Customers;
 import com.uvic.mapper.CustomersMapper;
 import com.uvic.service.CustomersService;
 import com.uvic.util.CommonResult;
+import com.uvic.util.Result;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,12 +42,12 @@ public class CustomersController {
 
     @RequestMapping(value = "/updateCustomer/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateCustomer(@PathVariable Integer id, @RequestBody Customers customers) {
+    public Result updateCustomer(@PathVariable Integer id, @RequestBody Customers customers) {
         int count = customersService.update(id, customers);
         if (count > 0) {
-            return CommonResult.success(count);
+            return Result.success(count);
         }
-        return CommonResult.failed();
+        return Result.failed();
     }
 
     @RequestMapping(value = "/deleteCustomer/{id}", method = RequestMethod.DELETE)

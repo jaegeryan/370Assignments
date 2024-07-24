@@ -22,17 +22,7 @@ public class CustomersServiceImpl extends ServiceImpl<CustomersMapper, Customers
     @Override
     public int update(Integer id, Customers customers) {
         customers.setCustomerId(id);
-        customers.setPhoneNumber(customers.getPhoneNumber());
-        customers.setAddress(customers.getAddress());
-        customers.setEmail(customers.getEmail());
-        customers.setFirstName(customers.getFirstName());
-        customers.setLastName(customers.getLastName());
-        int count = customersMapper.updateById(customers);
-        if (count > 0) {
-            return count;
-        } else {
-            return 0;
-        }
+        return customersMapper.updateByCustomerId(customers);
     }
 }
 

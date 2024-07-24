@@ -11,6 +11,7 @@ import com.uvic.entity.Customers;
 */
 public interface CustomersMapper extends BaseMapper<Customers> {
 
+    int updateByCustomerId(Customers customers);
 }
 
 
