@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.uvic.mapper.InventoryMapper">
+<mapper namespace="generator.mapper.InventoryMapper">
 
     <resultMap id="BaseResultMap" type="com.uvic.entity.Inventory">
             <id property="inventoryId" column="inventory_id" jdbcType="INTEGER"/>

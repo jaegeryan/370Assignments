@@ -1,7 +1,7 @@
 package com.uvic.service;
 
-import com.uvic.entity.Customers;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.uvic.entity.Customers;
 
 /**
 * @author Jaegeryan
@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CustomersService extends IService<Customers> {
 
+    int update(Integer id, Customers customers);
 }

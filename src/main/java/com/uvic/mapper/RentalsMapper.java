@@ -1,7 +1,7 @@
 package com.uvic.mapper;
 
-import com.uvic.entity.Rentals;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.uvic.entity.Rentals;
 
 /**
 * @author Jaegeryan

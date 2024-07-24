@@ -1,7 +1,7 @@
 package com.uvic.service;
 
-import com.uvic.entity.Consoles;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.uvic.entity.Consoles;
 
 /**
 * @author Jaegeryan

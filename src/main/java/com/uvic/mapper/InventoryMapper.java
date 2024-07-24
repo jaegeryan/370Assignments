@@ -1,8 +1,7 @@
 package com.uvic.mapper;
 
-import com.uvic.entity.Inventory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.uvic.entity.Inventory;
 
 /**
 * @author Jaegeryan
