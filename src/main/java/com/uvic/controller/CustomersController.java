@@ -15,17 +15,18 @@ public class CustomersController {
     @Resource
     private CustomersMapper customersMapper;
 
-    @GetMapping("/getAllCustomers")
+    @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
+    @ResponseBody
     public Object list() {
         List<Customers> customers = customersMapper.selectList(null);
-        return customers;
+        return CommonResult.success(customers, "Get all customers successfully");
     }
 
     @RequestMapping(value= "/getCustomerById", method = RequestMethod.POST)
     @ResponseBody
     public Object getCustomerById(Integer id) {
         Customers customers = customersMapper.selectById(id);
-        return customers;
+        return CommonResult.success(customers, "Get customer by id successfully");
     }
 
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
