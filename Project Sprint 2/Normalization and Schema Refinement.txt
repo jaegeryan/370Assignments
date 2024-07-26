@@ -1,0 +1,40 @@
+All of the following analysis is based on the improved ERD and sql code.
+
+BCNF analysis:
+
+1. Table 'Customers', Primary key 'Customer_ID', Candidate key 'Customer_ID'. Each non-candidate attribute is fully dependent on Customers_ID. Therefore, BCNF compliant.
+
+2. Table 'Rentals', Primary key 'Rental_ID', Candidate key 'Rental_ID'. Each non-candidate attribute is fully dependent on Rental_ID. Therefore, BCNF compliant.
+
+3. Table 'Game consoles', Primary key 'Console_ID', Candidate key 'Console_ID'. Each non-candidate attribute is fully dependent on Console_ID. Therefore, BCNF compliant.
+
+4. Table 'Transactions', Primary key 'Transaction_ID', Candidate key 'Transaction_ID'. Each non-candidate attribute is fully dependent on Transaction_ID. Therefore, BCNF compliant.
+
+5. Table 'Inventory'. We assume the inventory is unique, so unique Inventory_ID, so candidate key 'Inventory_ID'. Each non-candidate attribute is fully dependent on Inventory_ID. Therefore, BCNF compliant.
+
+According to the above BCNF analysis, our tables have met the requirements of BCNF and have minimized the redundancy and duplication of data. We can be based on this ERD to build a database as efficient as possible.
+
+Relations:
+
+1. One to one relations:.
+'Transfer', 'Transactions', 'Inventory'.
+'Ask', 'Rentals' and 'Transactions'
+
+2. One to many relations:
+'Contains', 'Game consoles' and 'Inventory'
+'Owns', 'Customers' and 'Rentals'
+'Include', 'Game consoles' and 'Transactions'
+
+3. Many to many relation:
+'Rent', 'Rentals' and 'Game consoles'
+'Check', 'Rentals' and 'Inventory'
+
+The creation and use of indexes to optimize the database will come later.
+
+Constraints:
+
+1. Ensure that the primary key columns of each table have unique values.
+2. Ensure that when data in one table references data in another table, the referenced data must exist, thus preventing invalid or inaccurate data insertions through foreign key constraints.
+3. Ensure that all primary keys are non-null and unique.
+4. Ensure that the attribute in Rentals, Rental_start_date is before Rental_end_date.
+5. Ensure First_name is not null in Customers.
