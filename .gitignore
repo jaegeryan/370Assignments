@@ -69,3 +69,4 @@ dmypy.json
 
 # Ignore other OS generated files
 Thumbs.db
+/target/

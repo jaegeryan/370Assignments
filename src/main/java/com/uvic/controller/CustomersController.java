@@ -21,21 +21,21 @@ public class CustomersController {
 
     @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
     @ResponseBody
-    public Object list() {
+    public CommonResult list() {
         List<Customers> customers = customersMapper.selectList(null);
         return CommonResult.success(customers, "Get all customers successfully");
     }
 
     @RequestMapping(value= "/getCustomerById/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Object getCustomerById( @PathVariable Integer id) {
+    public CommonResult getCustomerById( @PathVariable Integer id) {
         Customers customers = customersMapper.selectById(id);
         return CommonResult.success(customers, "Get customer by id successfully");
     }
 
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
     @ResponseBody
-    public Object addCustomer(@RequestBody Customers customers) {
+    public CommonResult addCustomer(@RequestBody Customers customers) {
         int insert = customersMapper.insert(customers);
         return CommonResult.success(insert, "Add customer successfully");
     }
@@ -52,7 +52,7 @@ public class CustomersController {
 
     @RequestMapping(value = "/deleteCustomer/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Object deleteCustomer(@PathVariable Integer id) {
+    public CommonResult deleteCustomer(@PathVariable Integer id) {
         int delete = customersMapper.deleteById(id);
         return CommonResult.success(delete, "Delete customer successfully");
     }
