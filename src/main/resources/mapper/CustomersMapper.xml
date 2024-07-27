@@ -12,12 +12,13 @@
             <result property="phoneNumber" column="phone_number" jdbcType="VARCHAR"/>
             <result property="address" column="address" jdbcType="VARCHAR"/>
             <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="rewardsPoints" column="rewards_points" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         customer_id,first_name,last_name,
         email,phone_number,address,
-        created_at
+        created_at,rewards_points
     </sql>
     <update id="updateByCustomerId" parameterType="com.uvic.entity.Customers">
         update customers

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uvic.mapper.VipCustomersMapper">
+
+    <resultMap id="BaseResultMap" type="com.uvic.entity.VipCustomers">
+            <id property="customerId" column="Customer_ID" jdbcType="INTEGER"/>
+            <result property="membershipLevel" column="Membership_Level" jdbcType="VARCHAR"/>
+            <result property="additionalDiscount" column="Additional_Discount" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Customer_ID,Membership_Level,Additional_Discount
+    </sql>
+</mapper>

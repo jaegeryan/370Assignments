@@ -54,8 +54,12 @@ public class Customers implements Serializable {
     /**
      *
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
+
+    /**
+     *
+     */
+    private Integer rewardsPoints;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

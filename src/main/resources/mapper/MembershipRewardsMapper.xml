@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uvic.mapper.MembershipRewardsMapper">
+
+    <resultMap id="BaseResultMap" type="com.uvic.entity.MembershipRewards">
+            <id property="rewardId" column="Reward_ID" jdbcType="INTEGER"/>
+            <result property="customerId" column="Customer_ID" jdbcType="INTEGER"/>
+            <result property="rewardPoints" column="Reward_points" jdbcType="INTEGER"/>
+            <result property="rewardDate" column="Reward_date" jdbcType="DATE"/>
+            <result property="rewardDescription" column="Reward_description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Reward_ID,Customer_ID,Reward_points,
+        Reward_date,Reward_description
+    </sql>
+</mapper>
