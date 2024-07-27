@@ -29,6 +29,7 @@ public class CustomersController {
     @RequestMapping(value= "/getCustomerById/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getCustomerById( @PathVariable Integer id) {
+        //Use mybatis-plus to get customer by id
         Customers customers = customersMapper.selectById(id);
         return CommonResult.success(customers, "Get customer by id successfully");
     }
@@ -56,4 +57,5 @@ public class CustomersController {
         int delete = customersMapper.deleteById(id);
         return CommonResult.success(delete, "Delete customer successfully");
     }
+
 }

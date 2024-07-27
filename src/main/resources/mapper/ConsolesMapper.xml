@@ -17,4 +17,10 @@
         console_id,model,type,
         storage_capacity,purchase_date,cost
     </sql>
+    <select id="selectByType" resultType="com.uvic.entity.Consoles">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM consoles
+        WHERE type = #{type}
+    </select>
 </mapper>
