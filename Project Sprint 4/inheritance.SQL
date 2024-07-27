@@ -22,11 +22,14 @@ CREATE TABLE Membership_Rewards (
     UNIQUE KEY (Customer_ID, Reward_ID),  -- Define a unique constraint
     FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
 );
+-- add a new column in customer
+ALTER TABLE Customers
+ADD COLUMN rewards_points INT DEFAULT 0;
 
 SELECT * FROM Customers;
 
-
 SET GLOBAL LOCAL_infile = 1;
+
 -- load data to the new tables
 LOAD DATA LOCAL INFILE 'C:/Users/54694/Desktop/csc370/Membership_Rewards'
 INTO TABLE Membership_Rewards
