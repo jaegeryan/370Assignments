@@ -15,7 +15,7 @@ public class InventoryController {
     @Resource
     private InventoryMapper inventoryMapper;
 
-    @RequestMapping("/getAllInventory")
+    @RequestMapping(value = "/getAllInventory", method = RequestMethod.GET)
     public CommonResult getAllInventory() {
         List<Inventory> inventory = inventoryMapper.selectList(null);
         if (inventory.size() > 0) {
@@ -25,8 +25,8 @@ public class InventoryController {
         }
     }
 
-    @RequestMapping("/getInventoryById")
-    public CommonResult getInventoryById(Integer id) {
+    @RequestMapping(value = "/getInventoryById/{id}", method = RequestMethod.GET)
+    public CommonResult getInventoryById(@PathVariable Integer id) {
         Inventory inventory = inventoryMapper.selectById(id);
         if (inventory != null) {
             return CommonResult.success(inventory);
