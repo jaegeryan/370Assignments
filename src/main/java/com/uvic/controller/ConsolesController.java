@@ -40,12 +40,34 @@ public class ConsolesController {
         return CommonResult.success(consoles);
     }
 
+    @RequestMapping(value = "/updateConsole", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateConsole(@RequestBody Consoles consoles) {
+        int update = consolesService.updateConsole(consoles);
+        if (update > 0) {
+            return CommonResult.success(update, "The console has been updated successfully");
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
     @RequestMapping(value = "/addConsole", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult addConsole(Consoles consoles) {
+    public CommonResult addConsole(@RequestBody Consoles consoles) {
         int insert = consolesService.addConsole(consoles);
         if (insert > 0) {
-            return CommonResult.success(insert);
+            return CommonResult.success(insert, "The console has been added successfully");
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @RequestMapping(value = "/deleteConsoleById/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult deleteConsoleById(@PathVariable Integer id) {
+        int delete = consolesService.deleteConsoleById(id);
+        if (delete > 0) {
+            return CommonResult.success(delete, "The console has been deleted successfully");
         } else {
             return CommonResult.failed();
         }

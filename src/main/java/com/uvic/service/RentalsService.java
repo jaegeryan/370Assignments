@@ -1,7 +1,12 @@
 package com.uvic.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.uvic.entity.Customers;
+import com.uvic.entity.Inventory;
 import com.uvic.entity.Rentals;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
 * @author Jaegeryan
@@ -10,4 +15,11 @@ import com.uvic.entity.Rentals;
 */
 public interface RentalsService extends IService<Rentals> {
 
+    @Transactional
+    int addRental(Rentals rental, Integer paymentMethod);
+
+    @Transactional
+    int updateRental(Rentals rental);
+
+    float calculateTotalCost(Date rentalStartDate, Date rentalEndDate);
 }

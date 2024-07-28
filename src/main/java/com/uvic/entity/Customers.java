@@ -54,6 +54,7 @@ public class Customers implements Serializable {
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
 
     /**

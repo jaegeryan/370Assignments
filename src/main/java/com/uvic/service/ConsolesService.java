@@ -2,6 +2,7 @@ package com.uvic.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.uvic.entity.Consoles;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author Jaegeryan
@@ -10,5 +11,12 @@ import com.uvic.entity.Consoles;
 */
 public interface ConsolesService extends IService<Consoles> {
 
+    @Transactional
     int addConsole(Consoles consoles);
+
+    @Transactional
+    int deleteConsoleById(Integer id);
+
+    @Transactional
+    int updateConsole(Consoles consoles);
 }

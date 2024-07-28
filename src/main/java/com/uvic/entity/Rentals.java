@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class Rentals implements Serializable {
     /**
      *
      */
-    @TableId()
+    @TableId(type = IdType.AUTO)
     private Integer rentalId;
 
     /**
@@ -42,11 +43,13 @@ public class Rentals implements Serializable {
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date rentalStartDate;
 
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date rentalEndDate;
 
     /**

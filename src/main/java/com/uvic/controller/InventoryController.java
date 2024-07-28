@@ -45,15 +45,4 @@ public class InventoryController {
             return CommonResult.failed();
         }
     }
-
-    @RequestMapping(value = "/addInventory", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult addInventory(@RequestBody Inventory inventory) {
-        int insert = inventoryMapper.insert(inventory);
-        if (insert > 0) {
-            return CommonResult.success(insert, "Add inventory successfully");
-        } else {
-            return CommonResult.failed();
-        }
-    }
 }
