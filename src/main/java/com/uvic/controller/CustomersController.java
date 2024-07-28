@@ -1,5 +1,6 @@
 package com.uvic.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.uvic.entity.Customers;
 import com.uvic.mapper.CustomersMapper;
 import com.uvic.service.CustomersService;
@@ -19,6 +20,10 @@ public class CustomersController {
     @Resource
     private CustomersService customersService;
 
+    /**
+     * Get all customers
+     * @return CommonResult
+     */
     @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult list() {
@@ -32,6 +37,19 @@ public class CustomersController {
         //Use mybatis-plus to get customer by id
         Customers customers = customersMapper.selectById(id);
         return CommonResult.success(customers, "Get customer by id successfully");
+    }
+
+    @RequestMapping(value = "/getCustomerByEmailAddress/{emailAddress}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getCustomerByEmailAddress(@PathVariable String emailAddress) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("email", emailAddress);
+        Customers customers = customersMapper.selectOne(queryWrapper);
+        if (customers == null) {
+            return CommonResult.failed("No customer found");
+        } else {
+            return CommonResult.success(customers, "Get customer by email address successfully");
+        }
     }
 
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
