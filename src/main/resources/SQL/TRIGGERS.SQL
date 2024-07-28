@@ -48,27 +48,6 @@ BEGIN
     WHERE Customer_ID = (SELECT customer_id FROM Rentals WHERE rental_id = NEW.rental_id);
 END;
 
-
-
--- Trigger5: Update console if console does not exists for new inserted inventory
-CREATE TRIGGER after_inventory_insert
-AFTER INSERT ON Inventory
-FOR EACH ROW
-BEGIN
-    DECLARE console_exists INT;
-
-    -- Check if there is a corresponding console record
-    SELECT COUNT(*) INTO console_exists
-    FROM Consoles
-    WHERE console_id = NEW.console_id;
-
-    -- If no corresponding console record exists, insert a new one
-    IF console_exists = 0 THEN
-        INSERT INTO Consoles (console_id, model, type, storage_capacity, purchase_date, cost)
-        VALUES (NEW.console_id, 'Default Model', 'Default Type', 'Default Capacity', CURDATE(), 0.00);
-    END IF;
-END;
-
 -- trigger 6 A trigger that automatically updates the status of the lease, such as automatically updating to expired after the date
 CREATE TRIGGER update_inventory_status_after_rental_end
 AFTER UPDATE ON Rentals
