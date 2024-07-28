@@ -1,69 +1,49 @@
-﻿-- 1. Trigger: Update Inventory Status on New Rental Insertion
-CREATE TRIGGER after_rental_insert
-AFTER INSERT ON Rentals
+﻿-- Trigger 1: Check if the Customer Exists
+CREATE TRIGGER before_transaction_insert
+BEFORE INSERT ON Transactions
 FOR EACH ROW
 BEGIN
-    UPDATE Inventory
-    SET status = 'Rented'
-    WHERE inventory_id = NEW.inventory_id;
-END;
+    DECLARE customer_exists INT;
 
-DROP TRIGGER after_rental_insert;
+    SELECT COUNT(*) INTO customer_exists
+    FROM Customers c
+    JOIN Rentals r ON c.customer_id = r.customer_id
+    WHERE r.rental_id = NEW.rental_id;
 
--- 2. Trigger: Update Inventory Status on Rental Completion
-CREATE TRIGGER after_rental_update
-AFTER UPDATE ON Rentals
-FOR EACH ROW
-BEGIN
-    IF NEW.rental_status = 'Completed' THEN
-        UPDATE Inventory
-        SET status = 'Available'
-        WHERE inventory_id = NEW.inventory_id;
-    END IF;
-END;
-
-DROP TRIGGER after_rental_update;
-
--- 3. Trigger: Delete Related Reward Records on VIP Customer Deletion
-CREATE TRIGGER after_vip_customer_delete
-AFTER DELETE ON VIP_Customers
-FOR EACH ROW
-BEGIN
-    DELETE FROM Membership_Rewards
-    WHERE Customer_ID = OLD.Customer_ID;
-END;
-
-DROP TRIGGER after_vip_customer_delete;
-
--- 4. Trigger: Update Customer Rewards Points on Rental Completion
-CREATE TRIGGER after_rental_completion
-AFTER UPDATE ON Rentals
-FOR EACH ROW
-BEGIN
-    IF NEW.rental_status = 'Completed' THEN
-        UPDATE Customers
-        SET rewards_points = rewards_points + NEW.total_cost
-        WHERE customer_id = NEW.customer_id;
-    END IF;
-END;
-DROP TRIGGER after_rental_completion;
-
--- 5. Trigger: Prevent Deleting a Console if It's Rented Out
-CREATE TRIGGER before_console_delete
-BEFORE DELETE ON Consoles
-FOR EACH ROW
-BEGIN
-    DECLARE rental_count INT;
-
-    SELECT COUNT(*) INTO rental_count
-    FROM Inventory i
-    JOIN Rentals r ON i.inventory_id = r.inventory_id
-    WHERE i.console_id = OLD.console_id AND r.rental_status = 'Ongoing';
-
-    IF rental_count > 0 THEN
+    IF customer_exists = 0 THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Cannot delete console as it is currently rented out';
+        SET MESSAGE_TEXT = 'Customer does not exist';
     END IF;
 END;
 
-DROP TRIGGER before_console_delete;
+-- Trigger 2: Update the Total Cost in the Rentals Table
+CREATE TRIGGER after_transaction_insert_update_total_cost
+AFTER INSERT ON Transactions
+FOR EACH ROW
+BEGIN
+    UPDATE Rentals
+    SET total_cost = (SELECT SUM(amount)
+                      FROM Transactions
+                      WHERE rental_id = NEW.rental_id)
+    WHERE rental_id = NEW.rental_id;
+END;
+
+-- Trigger 3: Update Customer Rewards Points
+CREATE TRIGGER after_transaction_insert_update_rewards
+AFTER INSERT ON Transactions
+FOR EACH ROW
+BEGIN
+    UPDATE Customers
+    SET rewards_points = rewards_points + NEW.amount
+    WHERE customer_id = (SELECT customer_id FROM Rentals WHERE rental_id = NEW.rental_id);
+END;
+
+-- Trigger 4: Update VIP Membership Level
+CREATE TRIGGER after_transaction_insert_update_vip
+AFTER INSERT ON Transactions
+FOR EACH ROW
+BEGIN
+    UPDATE VIP_Customers
+    SET Membership_Level = 'Gold'
+    WHERE Customer_ID = (SELECT customer_id FROM Rentals WHERE rental_id = NEW.rental_id);
+END;

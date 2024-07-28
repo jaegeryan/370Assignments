@@ -54,6 +54,11 @@ public class Consoles implements Serializable {
      */
     private BigDecimal cost;
 
+    /**
+     *
+     */
+    private String serialNumber;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

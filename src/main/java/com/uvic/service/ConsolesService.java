@@ -10,4 +10,5 @@ import com.uvic.entity.Consoles;
 */
 public interface ConsolesService extends IService<Consoles> {
 
+    int addConsole(Consoles consoles);
 }

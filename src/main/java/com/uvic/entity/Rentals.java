@@ -26,7 +26,7 @@ public class Rentals implements Serializable {
     /**
      *
      */
-    @TableId(type = IdType.AUTO)
+    @TableId()
     private Integer rentalId;
 
     /**
