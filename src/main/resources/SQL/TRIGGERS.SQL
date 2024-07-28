@@ -51,8 +51,7 @@ END;
 
 
 -- Trigger5: Update console if console does not exists for new inserted inventory
-CREATE
-.m n TRIGGER after_inventory_insert
+CREATE TRIGGER after_inventory_insert
 AFTER INSERT ON Inventory
 FOR EACH ROW
 BEGIN
